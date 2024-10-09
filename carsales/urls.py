@@ -1,0 +1,35 @@
+"""
+URL configuration for carsales project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('greetings/', include('greetings.urls')),  # Inclure les URLs de l'application greetings
+]               #en executant il faudrait se rassurer davoir 127.0.0.1:8000/greetings
+
+# from django.contrib import admin
+# from django.urls import path, include
+# from greetings import views  # Importer la vue pour l'URL racine
+#
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('', views.hello_world, name='home'),  # URL racine qui pointe vers la vue 'hello_world'
+#     path('greetings/', include('greetings.urls')),  # Inclure les URLs de greetings
+# ]
