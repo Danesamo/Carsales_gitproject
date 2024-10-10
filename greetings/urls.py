@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.hello_world, name='home'),  # URL racine de l'application
+    path('', views.home, name='home'),
+      # Inclure les URLs de l'application greetings
 ]
