@@ -21,15 +21,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('greetings/', include('greetings.urls')),  # Inclure les URLs de l'application greetings
+    path('', include('greetings.urls')),  # Inclure les URLs de l'application greetings
 ]               #en executant il faudrait se rassurer davoir 127.0.0.1:8000/greetings
-
-# from django.contrib import admin
-# from django.urls import path, include
-# from greetings import views  # Importer la vue pour l'URL racine
-#
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('', views.hello_world, name='home'),  # URL racine qui pointe vers la vue 'hello_world'
-#     path('greetings/', include('greetings.urls')),  # Inclure les URLs de greetings
-# ]
