@@ -8,3 +8,5 @@ urlpatterns = [
     path('', include('greetings.urls')),  # Inclure les URLs de l'application greetings
     path('cars/', include('cars.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
