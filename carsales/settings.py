@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+#FILE_CHARSET = 'utf-8'
+
+
 from pathlib import Path
 
 import os
@@ -29,12 +32,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = 'dashboard'
 
 # Application definition
 
 INSTALLED_APPS = [
     'cars.apps.CarsConfig',
     'greetings.apps.GreetingsConfig',
+    'accounts.apps.AccountsConfig',
+    'contacts.apps.ContactsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +49,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'django.contrib.humanize',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    #providers
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'carsales.urls'
@@ -124,11 +139,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'  # URL publique d'accès aux fichiers statiques
+
+# Le dossier où les fichiers statiques collectés seront stockés lors de la commande collectstatic
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Dossiers contenant les fichiers statiques qui seront collectés
 STATICFILES_DIRS = [
-    BASE_DIR / 'carsales/static',
+    BASE_DIR / 'carsales' / 'static',  # C'est bien de spécifier un chemin absolu dans le dossier 'static' de 'carsales'
 ]
+
 
 
 #media settings
@@ -141,3 +161,26 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Messages
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
+
+SITE_ID = 1
+
+# Ajoutez à la fin du fichier settings.py
+SOCIALACCOUNT_LOGIN_ON_GET = True  # Pour permettre la connexion via un clic direct sur le bouton
+#LOGIN_REDIRECT_URL = '/'  # Redirection après une connexion réussie
+LOGOUT_REDIRECT_URL = '/'  # Redirection après une déconnexion
+
+#email sending
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'glowandluxurious@gmail.com'
+EMAIL_HOST_PASSWORD = 'lbpu riam bslq xrmd'
+EMAIL_USE_TLS = True
